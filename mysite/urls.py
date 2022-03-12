@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from . import views
 
 
@@ -9,5 +9,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('UserRegistration/', views.user_r, name='user_r'),
     path('CharityRegistration/', views.charity_r, name='charity_r'),
-
+    path('', include('explore.urls')),
 ]
