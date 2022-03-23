@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Charity
 
+
 # posts = [
 #     {
 #         'name': 'abc',
@@ -21,36 +22,40 @@ from .models import Charity
 # ]
 
 def explore_page(request):
-    context={
+    context = {
         'posts': Charity.objects.all()
     }
-    return render(request,'explore.html',context)
+    return render(request, 'explore.html', context)
 
-def detail(request,charity_id):
-    return HttpResponse("<h2> Details for Charity id: " + str(charity_id)+"</h2>")
+
+def detail(request, charity_id):
+    return HttpResponse("<h2> Details for Charity id: " + str(charity_id) + "</h2>")
 
 
 def get_rating_sorted(request):
-    context={
+    context = {
         'posts': Charity.objects.all().order_by('-rating')
     }
     print("helllpp")
     if request.method == "GET":
-        return render(request, 'explore.html',context)
+        return render(request, 'explore.html', context)
+
 
 def get_AtoZ_sorted(request):
-    context={
+    context = {
         'posts': Charity.objects.all().order_by('name')
     }
     if request.method == "GET":
-        return render(request,'explore.html',context)
+        return render(request, 'explore.html', context)
+
 
 def get_ZtoA_sorted(request):
-    context={
+    context = {
         'posts': Charity.objects.all().order_by('-name')
     }
     if request.method == "GET":
-        return render(request,'explore.html',context)
+        return render(request, 'explore.html', context)
+
 
 def user_reg(request):
     return render(request, 'user_registration.html')

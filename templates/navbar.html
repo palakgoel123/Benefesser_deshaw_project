@@ -1,0 +1,32 @@
+{% load static %}
+<div class="b-example-divider"></div>
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a class="navbar-brand" style="color:#E5A5FF; font-size:1.3rem; font-weight:bold;" href="#">BENEFESSER</a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-1 justify-content-center mb-md-0">
+                <li><a href="/" class="nav-link ms-4 px-1 link-light">Home</a></li>
+                <li><a href="/explore" class="nav-link mx-2 px-1 link-light">Explore</a></li>
+                <li><a href="#" class="nav-link mx-2 px-1 link-light">Payment</a></li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color:white; margin-left:130px;">Welcome, {{user.username}}</a>
+                </li>
+                {% else %}{% endif %}
+
+            </ul>
+            <div class="text-end">
+                {% if user.is_authenticated or userc.is_authenticated %}
+                <button type="button" class="btn btn-outline-light me-2" onclick="location.href='logout'">Logout
+                </button>
+                {% else %}
+                <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/UserRegistration'">
+                    Register
+                </button>
+                <button type="button" class="btn btn-warning me-2" onclick="location.href='/login'">Login</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
+</div>
