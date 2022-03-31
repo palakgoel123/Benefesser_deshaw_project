@@ -47,7 +47,7 @@
 			display: flex;
 			justify-content: center;
 			flex-direction: column;
-			padding: 10px;
+			padding: 5px;
 			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -93,7 +93,7 @@
 <body>
 {% include 'navbar.html' %}
 <div class="container h-100">
-    <div class="d-flex justify-content-center h-100">
+    <div class="d-flex justify-content-center h-100 mt-4 mb-4">
         <div class="user_card">
             <div class="d-flex justify-content-center">
                 <h3 id="form-title">CHARITY REGISTRATION </h3>
@@ -115,21 +115,33 @@
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                        </div>
-                        {{formc.phone}}
-                    </div>
-                    <div class="input-group mb-2">
-                        <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-globe"></i></span>
                         </div>
                         {{formc.location}}
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-list"></i></span>
+                        </div>
+                        {{formc.charity_theme}}
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-image"></i></span>
+                        </div>
+                        {{formc.pic_link}}
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-file"></i></span>
                         </div>
                         {{formc.certificate}}
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-star"></i></span>
+                        </div>
+                        {{formc.rating}}
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-append">
@@ -180,13 +192,14 @@
 		var form_fields = document.getElementsByTagName('input')
 		form_fields[1].placeholder='Organisation Name..';
 		form_fields[2].placeholder='Year of formation..';
-		form_fields[3].placeholder='Phone Number..';
-		form_fields[4].placeholder='Location..';
-		form_fields[5].placeholder='Certificate..';
-		form_fields[6].placeholder='Username..';
-		form_fields[7].placeholder='Email..';
-		form_fields[8].placeholder='Enter password...';
-		form_fields[9].placeholder='Re-enter Password...';
+		form_fields[3].placeholder='Location..';
+		form_fields[4].placeholder='Charity Theme..';
+		form_fields[5].placeholder='Profile picture link..';
+		form_fields[7].placeholder='Rating..';
+		form_fields[8].placeholder='Username..';
+		form_fields[9].placeholder='Email..';
+		form_fields[10].placeholder='Enter password...';
+		form_fields[11].placeholder='Re-enter Password...';
 
 
 		for (var field in form_fields){

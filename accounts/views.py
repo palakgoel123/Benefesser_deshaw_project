@@ -9,7 +9,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CreateUserForm
 from .forms import CreateCharityForm
-from django.contrib.auth.forms import AuthenticationForm
 
 
 def user_r(request):
@@ -55,6 +54,8 @@ def charity_r(request):
         if formc.is_valid():
             formc.save()
             userc = formc.cleaned_data.get('username')
+            userc.set_password('raw password')
+            userc.save()
             messages.success(request, 'Account was created for ' + userc)
             return redirect('/loginc')
         else:

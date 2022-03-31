@@ -4,26 +4,27 @@ from django.shortcuts import render
 from .models import Charity
 
 
-# posts = [
-#     {
-#         'name': 'abc',
-#         'location': 'Alaska',
-#         'charity_theme': 'education',
-#         'rating': 4.2,
-#         'pic_link': 'https://tourtelegraph.com/wp-content/uploads/2021/04/Anchorage_alaska.tourtelegraph-750x430.jpg'
-#     },
-#     {
-#         'name': 'xyz',
-#         'location': 'Africa',
-#         'charity_theme': 'food for everyone',
-#         'rating': 3.8,
-#         'pic_link': 'https://www.cbcity.nsw.gov.au/communityccb/PublishingImages/community/Youth/stay%20connected%20food.jpg'
-#     }
-# ]
+posts = [
+    {
+        'name': 'Helping hands',
+        'location': 'India',
+        'charity_theme': 'education',
+        'rating': 4.2,
+        'pic_link': 'https://tourtelegraph.com/wp-content/uploads/2021/04/Anchorage_alaska.tourtelegraph-750x430.jpg'
+    },
+    {
+        'name': 'xyz',
+        'location': 'Africa',
+        'charity_theme': 'food for everyone',
+        'rating': 3.8,
+        'pic_link': 'https://www.cbcity.nsw.gov.au/communityccb/PublishingImages/community/Youth/stay%20connected%20food.jpg'
+    }
+]
 
 def explore_page(request):
     context = {
         'posts': Charity.objects.all()
+        # 'posts' : posts
     }
     return render(request, 'explore.html', context)
 
@@ -35,6 +36,7 @@ def detail(request, charity_id):
 def get_rating_sorted(request):
     context = {
         'posts': Charity.objects.all().order_by('-rating')
+        # 'posts' : posts
     }
     print("helllpp")
     if request.method == "GET":
@@ -44,6 +46,7 @@ def get_rating_sorted(request):
 def get_AtoZ_sorted(request):
     context = {
         'posts': Charity.objects.all().order_by('name')
+        # 'posts' : posts
     }
     if request.method == "GET":
         return render(request, 'explore.html', context)
@@ -52,6 +55,7 @@ def get_AtoZ_sorted(request):
 def get_ZtoA_sorted(request):
     context = {
         'posts': Charity.objects.all().order_by('-name')
+        # 'posts' : posts
     }
     if request.method == "GET":
         return render(request, 'explore.html', context)
