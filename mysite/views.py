@@ -1,15 +1,11 @@
+from django.contrib.auth import logout
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import auth
+from django.contrib import messages
 
 
 def index(request):
     return render(request, 'index.html')
 
-
-def user_r(request):
-    return render(request, 'user_registration.html')
-
-
-def charity_r(request):
-    return render(request, 'charity_registration.html')
 
