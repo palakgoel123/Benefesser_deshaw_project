@@ -23,17 +23,21 @@ posts = [
     }
 ]
 
+temp = Charity.objects.all()
+
 def search(request):
-  query = request.POST['search']
-  print( "QUERY: ")
-  print(query)
-  #t = loader.get_template('explore.html')
-  q = Charity.objects.filter(
-            Q(name__icontains=query) | Q(charity_theme__icontains=query) |  Q(location__icontains=query) 
-        )
-  c = { 'posts': q,}
-#   return HttpResponse(t.render(c))
-  return render(request, 'explore.html', c)
+    query = request.POST['search']
+    print( "QUERY: ")
+    print(query)
+    #t = loader.get_template('explore.html')
+    q = Charity.objects.filter(
+        Q(name__icontains=query) | Q(charity_theme__icontains=query) |  Q(location__icontains=query) 
+    )
+    c = { 'posts': q,}
+    global temp
+    temp = q
+    #   return HttpResponse(t.render(c))
+    return render(request, 'explore.html', c)
 
 
 def explore_page(request):
@@ -41,6 +45,8 @@ def explore_page(request):
         'posts': Charity.objects.all()
         # 'posts' : posts
     }
+    global temp
+    temp = Charity.objects.all()
     return render(request, 'explore.html', context)
 
 
@@ -50,7 +56,7 @@ def detail(request, charity_id):
 
 def get_rating_sorted(request):
     context = {
-        'posts': Charity.objects.all().order_by('-rating')
+        'posts': temp.order_by('-rating')
         # 'posts' : posts
     }
     print("helllpp")
@@ -60,7 +66,7 @@ def get_rating_sorted(request):
 
 def get_AtoZ_sorted(request):
     context = {
-        'posts': Charity.objects.all().order_by('name')
+        'posts': temp.order_by('name')
         # 'posts' : posts
     }
     if request.method == "GET":
@@ -69,7 +75,7 @@ def get_AtoZ_sorted(request):
 
 def get_ZtoA_sorted(request):
     context = {
-        'posts': Charity.objects.all().order_by('-name')
+        'posts': temp.order_by('-name')
         # 'posts' : posts
     }
     if request.method == "GET":
