@@ -6,6 +6,8 @@ from . import views
 
 # Code for video 7
 urlpatterns = [
+    re_path(r'^test_search_results/$', views.search, name='search'),
+    # //re_path(r'^search', views.SearchResultsView.as_view(), name='search_results'),
     path('explore/', views.explore_page, name='explore'),
     path('explore/sortedbyname_asc/', views.get_AtoZ_sorted, name='bynameasc'),
     path('explore/sortedbyname_desc/', views.get_ZtoA_sorted, name='bynamedesc'),

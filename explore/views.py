@@ -1,8 +1,10 @@
 from msilib.schema import ListView
+from unittest import loader
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Charity
-
+from django.views.generic import TemplateView, ListView
+from django.db.models import Q
 
 posts = [
     {
@@ -20,6 +22,19 @@ posts = [
         'pic_link': 'https://www.cbcity.nsw.gov.au/communityccb/PublishingImages/community/Youth/stay%20connected%20food.jpg'
     }
 ]
+
+def search(request):
+  query = request.POST['search']
+  print( "QUERY: ")
+  print(query)
+  #t = loader.get_template('explore.html')
+  q = Charity.objects.filter(
+            Q(name__icontains=query) | Q(charity_theme__icontains=query) |  Q(location__icontains=query) 
+        )
+  c = { 'posts': q,}
+#   return HttpResponse(t.render(c))
+  return render(request, 'explore.html', c)
+
 
 def explore_page(request):
     context = {
