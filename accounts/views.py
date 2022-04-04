@@ -54,17 +54,18 @@ def charity_r(request):
     if request.method == 'POST':
         formc = CreateCharityForm(request.POST)
         if formc.is_valid():
-            formc.save()
-            userc = formc.cleaned_data.get('username')
-            userc.set_password('raw password')
-            userc.save()
-            messages.success(request, 'Account was created for ' + userc)
+            saved_user=formc.save()
+            username = formc.cleaned_data.get('username')
+            password = formc.cleaned_data.get('password1')
+            saved_user.set_password(password)
+            saved_user.save()
+            messages.success(request, 'Account was created for ' + username)
             return redirect('/loginc')
         else:
             print(formc.errors)
 
     context = {'formc': formc}
-    return render(request, 'charity_registration.html', context)
+    return render(request, 'Charity_registration.html', context)
 
 
 def logincharity(request):
