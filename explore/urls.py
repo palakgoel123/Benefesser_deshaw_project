@@ -1,3 +1,4 @@
+import string
 from django.contrib import admin
 from django.urls import include, re_path
 from django.urls import include, path
@@ -17,5 +18,6 @@ urlpatterns = [
     path('/UserRegistration/', views.user_reg, name='user_reg_explore'),
     path('/CharityRegistration/', views.charity_reg, name='charity_reg_explore'),
     #explore/ => charity/charity_id
-    re_path(r'^charity/(?P<charity_id>[0-9A-Z]+)/$', views.detail, name='detailedpage' )
+    re_path(r'^charity/(?P<username>\w+)/$',  views.detail, name='detailedpage' )
+
 ]

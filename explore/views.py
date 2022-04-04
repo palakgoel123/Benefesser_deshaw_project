@@ -1,7 +1,7 @@
-from msilib.schema import ListView
+
 from unittest import loader
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import Charity
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
@@ -50,8 +50,11 @@ def explore_page(request):
     return render(request, 'explore.html', context)
 
 
-def detail(request, charity_id):
-    return HttpResponse("<h2> Details for Charity id: " + str(charity_id) + "</h2>")
+def detail(request, username):
+    the_user = get_object_or_404(Charity, username=username)
+    return render(request, 'Charity_HomePage.html', {'the_user': the_user,})
+    # print(the_user)
+    # return HttpResponse("<h2> Details for Charity id: " + str(username) + "</h2>")
 
 
 def get_rating_sorted(request):
