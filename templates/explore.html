@@ -46,13 +46,13 @@
         }
 
         #AlertDiv h1 {
-            {% comment %} width: 100px; {% endcomment %}
+            
             margin-left: auto;
             margin-right: auto;
             text-align:center;
         }
         #AlertDiv {
-            {% comment %} width: 100px; {% endcomment %}
+           
             margin-left: auto;
             margin-right: auto;
         }
@@ -148,8 +148,8 @@
                         <h3 class="mb-0">{{ post.name }}</h3>
                         <div class="mb-1 text-muted">{{ post.rating }}</div>
                         <p class="card-text mb-auto">{{ post.charity_theme }}</p>
-                        <a href="/charity/{{ post.charity_id }}" class="stretched-link"></a>
-                        <a role="button" class="btn btn-dark" href="/charity/{{ post.charity_id }}">Donate</a>
+                        <a href="/charity/{{ post.username}}" class="stretched-link"></a>
+                        <a role="button" class="btn btn-dark" href="/charity/{{ post.username}}">Donate</a>
                     </div>
                     <div class="col-auto d-none d-lg-block">
                         <img class="bd-placeholder-img" width="400" height="250" src="{{ post.pic_link }}" role="img"
