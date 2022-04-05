@@ -1,0 +1,132 @@
+<style>
+  .content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1.25em;
+    min-width: 550px;
+  }
+
+  .content-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .content-table th,
+  .content-table td {
+    padding: 8.5px 11px;
+  }
+
+  .content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .content-table th {
+    border-right: 1.5px solid #ffffff;
+  }
+  .content-table td {
+    border-right: 1.5px solid #363333;
+  }
+  .content-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+  .content-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+  }
+  td {
+    border-right: 1px #111010;
+  }
+
+  header {
+    display: block;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <header>
+              <h2 class="card-title">
+                <center><u>Admin Approval for Charity Registration</u></center>
+              </h2>
+            </header>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <div class="table">
+            <table class="content-table" cellpadding="10">
+              <thead>
+                <tr>
+                  <th>Charity <br />Name</th>
+                  <th>
+                    Year <br />of<br />
+                    Formation
+                  </th>
+                  <th>Charity<br />Theme</th>
+                  <th>Location</th>
+                  <th>Rating</th>
+                  <th>Certificate</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Password</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              {% for charity in registrations %}
+              <tr>
+                <td>{{ charity.name }}</td>
+                <td>{{ charity.year }}</td>
+                <td>{{ charity.charity_theme }}</td>
+                <td>{{ charity.location }}</td>
+                <td>{{ charity.rating }}</td>
+                <td><a href="{{ charity.certificate }}">Link</a></td>
+                <td>{{ charity.username }}</td>
+                <td>{{ charity.email }}</td>
+                <td>{{ charity.password1 }}</td>
+                <td>
+                  {% if charity.status == 0 %}
+                  <a
+                    href="{% url 'Charity_approve_reg' charity_id=charity.name %}"
+                    class="btn btn-success"
+                    >Approve</a
+                  >
+                  <a
+                    class="btn btn-danger"
+                    href="{% url 'Charity_disapprove_reg' charity_id=charity.name %}"
+                    >Disapprove</a
+                  >
+                  {% elif charity.status == 1 %}
+                  <button
+                    class="btn btn-warning"
+                    disabled="disabled"
+                    data-toggle="modal"
+                    data-target="#reply_modal"
+                  >
+                    Approved
+                  </button>
+                  {% else %}
+                  <button
+                    class="btn btn-danger"
+                    disabled="disabled"
+                    data-toggle="modal"
+                    data-target="#reply_modal"
+                  >
+                    Disapproved
+                  </button>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</section>

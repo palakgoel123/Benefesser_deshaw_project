@@ -1,7 +1,7 @@
 
 from unittest import loader
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, redirect, reverse
 from .models import Charity
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
@@ -25,15 +25,17 @@ posts = [
 
 temp = Charity.objects.all()
 
+
 def search(request):
     query = request.POST['search']
-    print( "QUERY: ")
+    print("QUERY: ")
     print(query)
     #t = loader.get_template('explore.html')
     q = Charity.objects.filter(
-        Q(name__icontains=query) | Q(charity_theme__icontains=query) |  Q(location__icontains=query) 
+        Q(name__icontains=query) | Q(charity_theme__icontains=query) | Q(
+            location__icontains=query)
     )
-    c = { 'posts': q,}
+    c = {'posts': q, }
     global temp
     temp = q
     #   return HttpResponse(t.render(c))
@@ -52,7 +54,7 @@ def explore_page(request):
 
 def detail(request, username):
     the_user = get_object_or_404(Charity, username=username)
-    return render(request, 'Charity_HomePage.html', {'the_user': the_user,})
+    return render(request, 'Charity_HomePage.html', {'the_user': the_user, })
     # print(the_user)
     # return HttpResponse("<h2> Details for Charity id: " + str(username) + "</h2>")
 
@@ -91,3 +93,41 @@ def user_reg(request):
 
 def charity_reg(request):
     return render(request, 'charity_registration.html')
+
+
+def admin_approval(request):
+    if request.method == "POST":
+        organisation_name = request.POST['name']
+        year = request.POST['year']
+        location = request.POST['location']
+        theme = request.POST['charity_theme']
+        rating = request.POST['rating']
+        pic_link = request.POST['pic_link']
+        document = request.POST['certificate']
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password1']
+        passw = request.POST['password2']
+        CharityInfo = Charity(name=organisation_name, year=year, location=location, charity_theme=theme, rating=rating,
+                              pic_link=pic_link, certificate=document, username=username, email=email, password1=password, password2=passw)
+        CharityInfo.save()
+        return render(request, '/explore')
+
+
+def admin_approval_view(request):
+    registrations = Charity.objects.all()
+    return render(request, 'adminapproval.html', {'registrations': registrations})
+
+
+def Charity_approve_reg(request, charity_id):
+    charity = Charity.objects.get(name=charity_id)
+    charity.status = 1
+    charity.save()
+    return render(request, '/AdminApprovalView')
+
+
+def Charity_disapprove_reg(request, charity_id):
+    charity = Charity.objects.get(name=charity_id)
+    charity.status = 2
+    charity.save()
+    return render(request, '/AdminApprovalView')
