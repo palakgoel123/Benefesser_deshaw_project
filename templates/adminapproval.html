@@ -92,7 +92,7 @@
                   {% if charity.status == 0 %}
                   <a
                     href="{% url 'Charity_approve_reg' charity_id=charity.name %}"
-                    class="btn btn-success"
+                    class="btn btn-success reply_open-modal" data-toggle="modal" data-target=""#reply_modal"
                     >Approve</a
                   >
                   <a

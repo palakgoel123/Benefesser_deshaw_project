@@ -123,11 +123,11 @@ def Charity_approve_reg(request, charity_id):
     charity = Charity.objects.get(name=charity_id)
     charity.status = 1
     charity.save()
-    return render(request, '/AdminApprovalView')
+    return HttpResponseRedirect(reverse("admin_approval_view"))
 
 
 def Charity_disapprove_reg(request, charity_id):
     charity = Charity.objects.get(name=charity_id)
     charity.status = 2
     charity.save()
-    return render(request, '/AdminApprovalView')
+    return HttpResponseRedirect(reverse("admin_approval_view"))

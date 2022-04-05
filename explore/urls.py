@@ -23,9 +23,9 @@ urlpatterns = [
     path('AdminApproval/', views.admin_approval, name='admin_approval'),
     path('AdminApprovalView/', views.admin_approval_view,
          name='admin_approval_view'),
-    path('Charity_approve_reg/<str:charity_id',
+    path('Charity_approve_reg/<str:charity_id>',
          views.Charity_approve_reg, name='Charity_approve_reg'),
-    path('Charity_disapprove_reg/<str:charity_id',
+    path('Charity_disapprove_reg/<str:charity_id>',
          views.Charity_disapprove_reg, name='Charity_disapprove_reg')
 
 ]
