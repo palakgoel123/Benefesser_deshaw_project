@@ -9,16 +9,18 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CreateUserForm
 from .forms import CreateCharityForm
-
+from UserPage.models import balance
 
 def user_r(request):
     form = CreateUserForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
+            USER = form.save()
             user = form.cleaned_data.get('username')
             messages.success(request, 'Account was created for ' + user)
+            instance = balance(user = USER, balance = 0)
+            instance.save()
             return redirect('/login')
         else:
             print(form.errors)
@@ -52,17 +54,18 @@ def charity_r(request):
     if request.method == 'POST':
         formc = CreateCharityForm(request.POST)
         if formc.is_valid():
-            formc.save()
-            userc = formc.cleaned_data.get('username')
-            userc.set_password('raw password')
-            userc.save()
-            messages.success(request, 'Account was created for ' + userc)
+            saved_user=formc.save()
+            username = formc.cleaned_data.get('username')
+            password = formc.cleaned_data.get('password1')
+            saved_user.set_password(password)
+            saved_user.save()
+            messages.success(request, 'Account was created for ' + username)
             return redirect('/loginc')
         else:
             print(formc.errors)
 
     context = {'formc': formc}
-    return render(request, 'charity_registration.html', context)
+    return render(request, 'Charity_registration.html', context)
 
 
 def logincharity(request):
