@@ -27,7 +27,7 @@ The aim of this project is to connect people who are willing to donate with the 
 
 The requirements of this project were to create the charity home page, user and charity registration - login, explore feature, rating review submission, wallet transactions interfaces.
 
-//high level design
+/High level design/
 
 This gave us a developed charity management system where the NGOs can register themselves and users get an interface to make donations to the organizations which align with their interest. The project is a dummy money transaction and management system operation through the wallet feature which enables easy fund gathering opportunities for the charity.
 
@@ -39,11 +39,11 @@ A detailed description of various features intended to be built in project
 
 1. User Registration : Donors can register themselves on the website
 2. Charity Registration: Charities also register themselves by giving information on Certification requirement, Programs to invest in, Funds allocation/use, a portfolio/description page
-2. Charity edit/update profile: To keep their profile updated with new programs or state of already existing ones.
-2. Explore feature : Users can browse different charities and filter across different attributes like Location, Theme,cause etc and donate to them.
-2. Review Feature: Users can share their experiences and reviews for certain ngos/charities they have visited, avg rating can be displayed of each charity.
-2. Payment Wallet: Users can add money to the wallet and then donate to their favored charitable cause.
-2. Logbook For Charity: Expense tracker for charity to keep track of donated funds and facilities/programs where the fund is used
+3. Charity edit/update profile: To keep their profile updated with new programs or state of already existing ones.
+4. Explore feature : Users can browse different charities and filter across different attributes like Location, Theme,cause etc and donate to them.
+5. Review Feature: Users can share their experiences and reviews for certain ngos/charities they have visited, avg rating can be displayed of each charity.
+6. Payment Wallet: Users can add money to the wallet and then donate to their favored charitable cause.
+7. Logbook For Charity: Expense tracker for charity to keep track of donated funds and facilities/programs where the fund is used
 
 Design and Architecture :
 
@@ -52,30 +52,30 @@ Used SQLite as a database management system provided by Django for maintaining b
 Following relations tables exist in our schema:
 
 1. Charity database
-1. User database
-1. User Balance database
+2. User database
+3. User Balance database
 
 The User Balance database is used to store the corresponding wallet balances of the users and has a foriegn key reference to the User database through username as Primary key.
 
 Snippets :
 
-![](img/Aspose.Words.42c11547-ec85-4f10-b3ed-d11c0c07e7d8.002.jpeg)
+![](img/one.png)
 
-![](img/Aspose.Words.42c11547-ec85-4f10-b3ed-d11c0c07e7d8.003.jpeg)
+![](img/two.png)
 
-![](img/Aspose.Words.42c11547-ec85-4f10-b3ed-d11c0c07e7d8.004.jpeg)
+![](img/three.png)
 
-![](img/Aspose.Words.42c11547-ec85-4f10-b3ed-d11c0c07e7d8.005.jpeg)
+![](img/four.png)
 
-![](img/Aspose.Words.42c11547-ec85-4f10-b3ed-d11c0c07e7d8.006.jpeg)
+![](img/five.png)
 
-![](img/Aspose.Words.42c11547-ec85-4f10-b3ed-d11c0c07e7d8.007.jpeg)
+![](img/six.png)
 
-![](img/Aspose.Words.42c11547-ec85-4f10-b3ed-d11c0c07e7d8.008.jpeg)
+![](img/seven.jpeg)
 
-![](img/Aspose.Words.42c11547-ec85-4f10-b3ed-d11c0c07e7d8.009.jpeg)
+![](img/eight.jpeg)
 
-![](img/Aspose.Words.42c11547-ec85-4f10-b3ed-d11c0c07e7d8.010.jpeg)
+![](img/nine.jpeg)
 
 Future Scope :
 
