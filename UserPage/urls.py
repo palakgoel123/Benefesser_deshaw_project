@@ -7,4 +7,5 @@ from . import views
 urlpatterns = [
     path('profile/', views.profile_page, name='profile'),
     re_path(r'/addmoney/', views.addmoney, name='add_money'),
+    re_path(r'^updated/$', views.adding, name='adding'),
 ]
