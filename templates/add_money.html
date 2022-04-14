@@ -37,11 +37,12 @@
 
       <div class="container">
         <div class="py-5 text-center">
-          <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+          <!-- <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
           <h2>Add Money</h2>
           <p class="lead">Below is an primitive form built to enable virtual wallet transactions .</p>
         </div>
-  
+       
+          
         <div class="row">
           <div class="col-md-4 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -57,41 +58,24 @@
                 <!-- <span class="text-muted">$12</span> -->
               </li>
               <li class="list-group-item d-flex justify-content-between lh-condensed">
-                  <form>
-                        <div class="form-group">
-                          <label for="formGroupExampleInput">Example label</label>
-                          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-                        </div>
-                        <div class="form-group">
-                          <label for="formGroupExampleInput2">Another label</label>
-                          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-                        </div>
-                  </form>
-                <div>
-                  <h6 class="my-0">Second product</h6>
-                  <small class="text-muted">Brief description</small>
+                
+              <form method="POST" action="{%url 'adding'%}" >
+                  {% csrf_token %}
+                <div class="form-group">
+                    <input id="adding" type="search" class="form-control rounded" placeholder="inUSD" aria-label="Search"
+                          aria-describedby="search-addon" name="adding" value='{{ query }}'>
                 </div>
-                <span class="text-muted">$8</span>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Continue</button>
+              </form>  
               </li>
       
-              <li class="list-group-item d-flex justify-content-between">
-                <span>Total (USD)</span>
-                <strong>$20</strong>
-              </li>
+      
             </ul>
   
-            <form class="card p-2">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Promo code">
-                <div class="input-group-append">
-                  <button type="submit" class="btn btn-secondary">Redeem</button>
-                </div>
-              </div>
-            </form>
           </div>
           <div class="col-md-8 order-md-1">
-            <form class="needs-validation" novalidate>
-  
+            
+            <form  >
               <h4 class="mb-3">Payment</h4>
   
               <div class="d-block my-3">
@@ -142,7 +126,7 @@
                 </div>
               </div>
               <hr class="mb-4">
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+              
             </form>
           </div>
         </div>
