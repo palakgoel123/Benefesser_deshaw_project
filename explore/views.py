@@ -1,7 +1,8 @@
 
 from unittest import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render, redirect, reverse
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 from .models import Charity
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
@@ -25,17 +26,15 @@ posts = [
 
 temp = Charity.objects.all()
 
-
 def search(request):
     query = request.POST['search']
-    print("QUERY: ")
+    print( "QUERY: ")
     print(query)
     #t = loader.get_template('explore.html')
     q = Charity.objects.filter(
-        Q(name__icontains=query) | Q(charity_theme__icontains=query) | Q(
-            location__icontains=query)
+        Q(name__icontains=query) | Q(charity_theme__icontains=query) |  Q(location__icontains=query) 
     )
-    c = {'posts': q, }
+    c = { 'posts': q,}
     global temp
     temp = q
     #   return HttpResponse(t.render(c))
@@ -54,7 +53,7 @@ def explore_page(request):
 
 def detail(request, username):
     the_user = get_object_or_404(Charity, username=username)
-    return render(request, 'Charity_HomePage.html', {'the_user': the_user, })
+    return render(request, 'Charity_HomePage.html', {'the_user': the_user,})
     # print(the_user)
     # return HttpResponse("<h2> Details for Charity id: " + str(username) + "</h2>")
 
@@ -93,7 +92,6 @@ def user_reg(request):
 
 def charity_reg(request):
     return render(request, 'charity_registration.html')
-
 
 def admin_approval(request):
     if request.method == "POST":
