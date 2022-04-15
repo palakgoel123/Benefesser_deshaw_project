@@ -15,7 +15,10 @@
        * {
   box-sizing: border-box;
 }
-
+.navbar-fixed {
+  left: 200px; /* just an estimate of your sidebar's width */
+  width: calc(100% - 200px);
+}
 body {
   font-family: Arial;
   margin: 0 auto; /* Center website */
@@ -89,12 +92,51 @@ body {
     </style>
   </head>
   <body>
+    {% load static %}
+    <div class="b-example-divider"></div>
+    <header class="p-3 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a class="navbar-brand" style="color:#E5A5FF; font-size:1.3rem; font-weight:bold;" href="#">BENEFESSER</a>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-1 justify-content-center mb-md-0">
+                    <li><a href="/" class="nav-link ms-4 px-1 link-light">Home</a></li>
+                    <li><a href="/explore" class="nav-link mx-2 px-1 link-light">Explore</a></li>
+                    <li><a href="#" class="nav-link mx-2 px-1 link-light">Payment</a></li>
+
+                </ul>
+                <div class="text-end">
+                    {% if user.is_authenticated or userc.is_authenticated %}
+                    
+                    <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/profile'">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-fill" viewBox="1.2 1.2 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                        Profile
+                    </button>
+                    <button type="button" class="btn btn-outline-light me-2" onclick="location.href='logout'">Logout
+                    </button>
+                    {% else %}
+                    <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/UserRegistration'">
+                        Register
+                    </button>
+                    <button type="button" class="btn btn-warning me-2" onclick="location.href='/login'">Login</button>
+                    {% endif %}
+
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    </div>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Home</a>
+          
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
+          <div class="collapse navbar-collapse"></div>
+
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
@@ -108,10 +150,7 @@ body {
                 <a class="nav-link active" href="#rating">Rating</a>
               </li>
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            
           </div>
         </div>
       </nav>
@@ -127,7 +166,7 @@ body {
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item">
-                    <img src="https://www.nerdwallet.com/assets/blog/wp-content/uploads/2016/04/iStock_000078209523_Small-770x335.jpg"
+                    <img src= {{ the_user.pic_link }}
                          class="d-block " style="height:480px; width:90%; margin:auto; margin-top:15px;" alt="...">
                 </div>
                 <div class="carousel-item">
@@ -160,56 +199,56 @@ body {
             <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#bootstrap"/></svg>
             <div>
               <h4 class="fw-bold mb-0">Charity Name</h4>
-              <p>Bill Gates Foundation</p>
+              <p>{{the_user.name}}</p>
             </div>
           </div>
           <div class="col d-flex align-items-start">
             <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#cpu-fill"/></svg>
             <div>
               <h4 class="fw-bold mb-0">Location</h4>
-              <p>United States</p>
+              <p>{{the_user.location}}</p>
             </div>
           </div>
           <div class="col d-flex align-items-start">
             <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3"/></svg>
             <div>
               <h4 class="fw-bold mb-0">Year of Founding</h4>
-              <p>2001</p>
+              <p>{{the_user.year}}</p>
             </div>
           </div>
           <div class="col d-flex align-items-start">
             <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#home"/></svg>
             <div>
               <h4 class="fw-bold mb-0">Theme</h4>
-              <p>Gender Equality, Global development</p>
+              <p>{{the_user.charity_theme}}</p>
             </div>
           </div>
           <div class="col d-flex align-items-start">
             <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#speedometer2"/></svg>
             <div>
               <h4 class="fw-bold mb-0">Rating</h4>
-              <p></p>
+              <p>{{the_user.rating}}</p>
             </div>
           </div>
           <div class="col d-flex align-items-start">
             <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#toggles2"/></svg>
             <div>
               <h4 class="fw-bold mb-0">Username</h4>
-              <p>@gatesfoundation</p>
+              <p>@{{the_user.username}}</p>
             </div>
           </div>
           <div class="col d-flex align-items-start">
             <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#geo-fill"/></svg>
             <div>
               <h4 class="fw-bold mb-0">Charity id</h4>
-              <p>4528095</p>
+              <p>{{the_user.charity_id}}</p>
             </div>
           </div>
           <div class="col d-flex align-items-start">
             <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#tools"/></svg>
             <div>
               <h4 class="fw-bold mb-0">Contact</h4>
-              <p>gatesfoundation@gmail.com</p>
+              <p>{{the_user.email}}</p>
             </div>
           </div>
         </div>
@@ -220,7 +259,7 @@ body {
 <span class="fa fa-star checked"></span>
 <span class="fa fa-star checked"></span>
 <span class="fa fa-star"></span>
-<p>4.1 average based on 254 reviews.</p>
+<p>{{the_user.rating}} average.</p>
 <hr style="border:3px solid #f1f1f1">
 
 <div class="row">

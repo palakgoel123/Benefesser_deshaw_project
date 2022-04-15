@@ -47,15 +47,32 @@
         </p>
       </div>
     </div>
-
+    {% if posts is not None and posts is 1 %}
+    <div class="alert alert-danger" role="alert">
+      Transaction denied. Balance insufficient.
+    </div>
+    {% elif posts is 0 %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <h4 class="alert-heading">Transaction success!</h4>
+      <p>Beneffeser thanks you for your time and generous gift. We are thrilled to have your support. </p>
+      
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}
     {% comment %} to show current balance use one more card {% endcomment %}
     <div class="jumbotron  bg-dark text-white">
         <div class="col-sm-8 mx-auto" >
-          <h3>CURRENT BALANCE:      {{ balance }} </h3>
+          {% if balance %}
+          <h3>CURRENT BALANCE:      {{ balance }} USD </h3>
+          {% else %}
+          <h3>CURRENT BALANCE:      -- USD </h3>
+          {% endif %}
           <p></p>
-          <p>
+          <!-- <p>
             <a class="btn btn-primary" href="addmoney/" role="button">Add Money &raquo;</a>
-          </p>
+          </p> -->
         </div>
       </div>
   </main>
